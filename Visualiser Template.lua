@@ -1,24 +1,23 @@
-local RunService = game:GetService("RunService");
-local Players = game:GetService("Players");
-local Player = Players.LocalPlayer;
-repeat wait(); until Player.Character;
+local runService = game:GetService("RunService");
+local players = game:GetService("Players");
+local player = assert(players.LocalPlayer, 'Script must be ran locally');
 
-local Character = Player.Character;
-local HumanoidRootPart = Character.HumanoidRootPart;
+local character = player.Character or player.CharacterAdded:wait()
+local humanoidRootPart = character.HumanoidRootPart;
 
-local Sound = Instance.new('Sound',HumanoidRootPart);
-Sound.Volume = 1;
+local sound = Instance.new("Sound", humanoidRootPart);
+sound.Volume = 1;
 
-Player.Chatted:connect(function(message)
-        if message:sub(1,4) == "play" then
-            Sound.SoundId = 'rbxassetid://'..message:sub(6);
-            Sound:Play();
-        elseif message:sub(1,6) == "volume" then
-            Sound.Volume = tonumber(message:sub(8));
-        end;
+player.Chatted:connect(function(message)
+    if message:sub(1,4) == "play" then
+        sound.SoundId = "rbxassetid://"..message:sub(6);
+        sound:Play();
+    elseif message:sub(1,6) == "volume" then
+        sound.Volume = tonumber(message:sub(8));
+    end
 end);
 
 
-RunService.RenderStepped:Connect(function()
-        print(Sound.PlaybackLoudness);-->Gives You a Number Value
+runService.RenderStepped:connect(function()
+    print(sound.PlaybackLoudness);-->Gives You a Number Value
 end);
