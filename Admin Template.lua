@@ -6,6 +6,41 @@ local Player = Players.LocalPlayer
 	Key = ":"
 };
 
+local FindPlayers
+FindPlayers = function(msg)
+    local plrs = {}
+    if msg:match("^!") then
+        return FindPlayers(Player, msg:sub(2), true)
+    elseif msg == "me" then
+        table.insert(plrs, Player)
+    elseif msg == "all" then
+        for _,v in pairs(game:service'Players':players()) do
+            table.insert(plrs, v)
+        end
+
+elseif msg == "random" then
+        for i,v in pairs(game:service'Players':players()) do
+local M = math.random(1,#game:service'Players':players())
+                table.insert(plrs, i[M])
+end
+
+    elseif msg == "others" then
+        for _,v in pairs(game:service'Players':players()) do
+            if v ~= Player then
+                table.insert(plrs, v)
+            end
+        end
+    else
+        for _,v in pairs(game:service'Players':players()) do
+            if v.Name:lower():sub(1,#msg) == msg:lower() then
+                table.insert(plrs, v)
+else
+	 table.insert(plrs, Player)
+            end
+        end
+    end
+    return plrs
+end
 
 local function NewCmd(name, usage, func)
       table.insert(AdminTemplate.Commands, {
