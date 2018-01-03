@@ -10,7 +10,7 @@ local Sound = Instance.new('Sound',HumanoidRootPart);
 Sound.Volume = 1;
 
 Player.Chatted:connect(function(message)
-        if message:sub(1,4) == 'play' then
+        if message:sub(1,4) == "play" then
             Sound.SoundId = 'rbxassetid://'..message:sub(6);
             Sound:Play();
         elseif message:sub(1,6) == "volume" then
