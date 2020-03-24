@@ -13,7 +13,7 @@ local user_prefix = ";"
 local function split_string( string_code )
     if (not type(split_key) == "string") then return {string_code} end;
     if (not type(string_code) == "string") then return {string_code} end;
-    if ( string_code:find( split_key ) ) then
+    if (string_code:find(split_key)) then
 	local string_table = {};
 	for args in string_code:gmatch("[^"..split_key.."]+") do
 		table.insert(string_table, args)
