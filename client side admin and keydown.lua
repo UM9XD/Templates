@@ -1,6 +1,5 @@
 local get_service = game.GetService
-local input_service = get_service(game, "UserInptService")
-local action_service = get_service(game, "ContextActionService")
+local input_service = get_service(game, "UserInputService")
 local players_service = get_service(game, "Players")
 local player = players_service.LocalPlayer
 local player_mouse = player:GetMouse()
@@ -84,13 +83,13 @@ player_mouse.KeyDown:Connect(function()
 	for Index,Value in next, keys_table do
 		if type(Value["Function"]) == "function" then
 			if Value["Shifted"] then
-				if action_service:IsKeyDown(Enum.KeyCode.LeftShift) and action_service:IsKeyDown(Enum.KeyCode[Value.Key]) then
+				if input_service:IsKeyDown(Enum.KeyCode.LeftShift) and input_service:IsKeyDown(Enum.KeyCode[Value.Key]) then
 					Value["Toggled"] = not Value["Toggled"]
 					Value["Function"](Value["Toggled"]);
 					return 'Executed'
 				end
 			else
-				if action_service:IsKeyDown(Enum.KeyCode[Value.Key]) and not action_service:IsKeyDown(Enum.KeyCode.LeftShift) then
+				if input_service:IsKeyDown(Enum.KeyCode[Value.Key]) and not input_service:IsKeyDown(Enum.KeyCode.LeftShift) then
 					Value["Toggled"] = not Value["Toggled"]
 					Value["Function"](Value["Toggled"]);
 					return 'Executed'
